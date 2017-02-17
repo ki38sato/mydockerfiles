@@ -29,6 +29,9 @@ ENV PATH /direnv/bin:/peco/bin:/ghq/bin:/ref/bin:$PATH
 ENV GOPATH /ref:/data
 
 RUN go get github.com/mattn/gom
+RUN set -ex \
+	&& go get github.com/Masterminds/glide \
+	&& go install github.com/Masterminds/glide
 
 WORKDIR /data
 
