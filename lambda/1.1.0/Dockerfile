@@ -15,7 +15,7 @@ RUN set -ex \
 	&& mkdir /data \
 	&& mkdir -p /direnv/bin \
 	&& apt-get update \
-	&& apt-get install -y unzip curl git \
+	&& apt-get install -y unzip curl git groff \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& curl -fSL -o /direnv/bin/direnv https://github.com/zimbatm/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
 	&& chmod +x /direnv/bin/direnv \
