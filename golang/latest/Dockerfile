@@ -1,8 +1,8 @@
-FROM golang:1.7.0
+FROM golang:1.8.3
 
-ENV DIRENV_VERSION 2.8.1
-ENV PECO_VERSION 0.3.6
-ENV GHQ_VERSION 0.7.4
+ARG DIRENV_VERSION=2.11.3
+ARG PECO_VERSION=0.5.1
+ARG GHQ_VERSION=0.7.4
 
 RUN set -ex \
 	&& apt-get update \
@@ -25,8 +25,14 @@ RUN set -ex \
 	&& apt-get -y --purge remove unzip \
 	&& mkdir /ref
 
-ENV PATH /direnv/bin:/peco/bin:/ghq/bin:$PATH
+ENV PATH /direnv/bin:/peco/bin:/ghq/bin:/ref/bin:$PATH
 ENV GOPATH /ref:/data
+
+RUN go get github.com/mattn/gom
+RUN set -ex \
+	&& go get github.com/Masterminds/glide \
+	&& go install github.com/Masterminds/glide
+RUN go get github.com/tools/godep
 
 WORKDIR /data
 
