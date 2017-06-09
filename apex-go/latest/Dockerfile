@@ -1,15 +1,16 @@
 FROM golang:1.8.3
 
-RUN curl https://raw.githubusercontent.com/apex/apex/master/install.sh | sh
-
 ARG DIRENV_VERSION=2.11.3
 ARG PECO_VERSION=0.5.1
 ARG GHQ_VERSION=0.7.4
 
 RUN set -ex \
 	&& apt-get update \
-	&& apt-get install -y unzip curl git \
+	&& apt-get install -y --no-install-recommends unzip curl git groff jq \
 	&& rm -rf /var/lib/apt/lists/* \
+	&& curl https://raw.githubusercontent.com/apex/apex/master/install.sh | sh \
+	&& curl https://bootstrap.pypa.io/get-pip.py | python \
+	&& pip install awscli \
 	&& mkdir -p /direnv/bin \
 	&& curl -fSL -o /direnv/bin/direnv https://github.com/zimbatm/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
 	&& chmod +x /direnv/bin/direnv \
