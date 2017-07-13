@@ -1,5 +1,6 @@
 FROM golang:1.8.3
 
+ARG TERRAFORM_VERSION=0.9.11
 ARG DIRENV_VERSION=2.11.3
 ARG PECO_VERSION=0.5.1
 ARG GHQ_VERSION=0.7.4
@@ -13,6 +14,10 @@ RUN set -ex \
 	&& curl https://raw.githubusercontent.com/apex/apex/master/install.sh | sh \
 	&& curl https://bootstrap.pypa.io/get-pip.py | python \
 	&& pip install --no-cache-dir -r requirements.txt \
+	&& curl -fSL -o terraform.zip  https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+	&& mkdir -p /terraform/bin \
+	&& unzip terraform.zip -d /terraform/bin \
+	&& rm terraform.zip \
 	&& mkdir -p /direnv/bin \
 	&& curl -fSL -o /direnv/bin/direnv https://github.com/zimbatm/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
 	&& chmod +x /direnv/bin/direnv \
@@ -30,7 +35,7 @@ RUN set -ex \
 	&& apt-get -y --purge remove unzip \
 	&& mkdir /ref
 
-ENV PATH /direnv/bin:/peco/bin:/ghq/bin:/ref/bin:$PATH
+ENV PATH /terraform/bin:/direnv/bin:/peco/bin:/ghq/bin:/ref/bin:$PATH
 ENV GOPATH /ref:/data
 
 RUN go get github.com/mattn/gom
