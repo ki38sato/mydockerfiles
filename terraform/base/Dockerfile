@@ -1,13 +1,14 @@
 FROM debian:jessie
 
-ARG TERRAFORM_VERSION=0.9.11
+ARG TERRAFORM_VERSION=0.10.8
 ARG DIRENV_VERSION=2.10.0
 ARG PECO_VERSION=0.5.1
 ARG GHQ_VERSION=0.7.4
 
 RUN set -x \
 	&& apt-get update \
-	&& apt-get install -y unzip curl git \
+	&& apt-get install -y unzip curl git python-pip jq \
+	&& pip install awscli \
 	&& curl -fSL -o terraform.zip  https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
 	&& mkdir -p /terraform/bin \
 	&& unzip terraform.zip -d /terraform/bin \
