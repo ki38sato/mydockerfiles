@@ -23,7 +23,3 @@ RUN set -ex \
 
 
 ENV PATH /direnv/bin:/peco/bin:/ghq/bin:$PATH
-
-WORKDIR /data
-
-ENTRYPOINT ["/bin/bash"]
