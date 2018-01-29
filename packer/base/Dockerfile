@@ -1,8 +1,8 @@
-FROM hashicorp/packer:1.1.1
+FROM hashicorp/packer:1.1.3
 
-ARG DIRENV_VERSION=2.8.1
-ARG PECO_VERSION=0.3.6
-ARG GHQ_VERSION=0.7.4
+ARG DIRENV_VERSION=2.13.3
+ARG PECO_VERSION=0.5.2
+ARG GHQ_VERSION=0.8.0
 
 RUN set -ex \
 	&& echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
