@@ -1,11 +1,10 @@
-FROM python:2.7.11-slim
+FROM python:3.6.4-slim
 
-ENV ANSIBLE_VERSION 1.9.6
-ENV DIRENV_VERSION 2.8.1
-ENV PECO_VERSION 0.3.6
-ENV GHQ_VERSION 0.7.4
+ARG ANSIBLE_VERSION=2.4.0
+ARG DIRENV_VERSION=2.13.3
+ARG PECO_VERSION=0.5.2
+ARG GHQ_VERSION=0.8.0
 
-ADD ansible_vault_pass /etc/ansible/ansible_vault_pass
 ADD requirements.txt requirements.txt
 
 RUN set -ex \
@@ -22,13 +21,10 @@ RUN set -ex \
 	&& pip install boto boto3 \
 	&& pip install ansible==$ANSIBLE_VERSION \
 	&& apt-get purge -y --auto-remove $buildDeps \
-	&& mkdir -p /etc/ansible \
-	&& mkdir -p /data/stanby-ansible-repo \
 	&& pip install --no-cache-dir -r requirements.txt \
-	&& chmod 0600 /etc/ansible/ansible_vault_pass \
 	&& mkdir -p /direnv/bin \
   && apt-get update \
-  && apt-get install -y unzip curl git \
+  && apt-get install -y --no-install-recommends unzip curl git jq zip \
   && rm -rf /var/lib/apt/lists/* \
 	&& curl -fSL -o /direnv/bin/direnv https://github.com/zimbatm/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
 	&& chmod +x /direnv/bin/direnv \
@@ -42,8 +38,7 @@ RUN set -ex \
 	&& cd /tmp \
 	&& unzip /tmp/ghq_linux_amd64.zip \
 	&& mv /tmp/ghq /ghq/bin/ghq \
-	&& rm -rf /tmp/* \
-	&& apt-get -y --purge remove unzip
+	&& rm -rf /tmp/*
 
 ENV PATH /direnv/bin:/peco/bin:/ghq/bin:$PATH
 
