@@ -1,7 +1,7 @@
 FROM python:3.6.4-slim
 
 ARG ANSIBLE_VERSION=2.4.0
-ARG DIRENV_VERSION=2.13.3
+ARG DIRENV_VERSION=2.17.0
 ARG PECO_VERSION=0.5.2
 ARG GHQ_VERSION=0.8.0
 
@@ -26,7 +26,7 @@ RUN set -ex \
   && apt-get update \
   && apt-get install -y --no-install-recommends unzip curl git jq zip \
   && rm -rf /var/lib/apt/lists/* \
-	&& curl -fSL -o /direnv/bin/direnv https://github.com/zimbatm/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
+	&& curl -fSL -o /direnv/bin/direnv https://github.com/direnv/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
 	&& chmod +x /direnv/bin/direnv \
 	&& mkdir -p /peco/bin \
 	&& curl -fSL -o peco_linux_amd64.tar.gz https://github.com/peco/peco/releases/download/v${PECO_VERSION}/peco_linux_amd64.tar.gz \

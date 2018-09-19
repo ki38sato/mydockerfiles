@@ -1,7 +1,7 @@
 FROM golang:1.9.3
 
 ARG TERRAFORM_VERSION=0.11.2
-ARG DIRENV_VERSION=2.13.3
+ARG DIRENV_VERSION=2.17.0
 ARG PECO_VERSION=0.5.2
 ARG GHQ_VERSION=0.8.0
 
@@ -19,7 +19,7 @@ RUN set -ex \
 	&& unzip terraform.zip -d /terraform/bin \
 	&& rm terraform.zip \
 	&& mkdir -p /direnv/bin \
-	&& curl -fSL -o /direnv/bin/direnv https://github.com/zimbatm/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
+	&& curl -fSL -o /direnv/bin/direnv https://github.com/direnv/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
 	&& chmod +x /direnv/bin/direnv \
 	&& mkdir -p /peco/bin \
 	&& curl -fSL -o peco_linux_amd64.tar.gz https://github.com/peco/peco/releases/download/v${PECO_VERSION}/peco_linux_amd64.tar.gz \
