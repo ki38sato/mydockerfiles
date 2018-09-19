@@ -1,7 +1,7 @@
 FROM java:8-jre
 
 ENV EMBULK_VERSION 0.8.12
-ENV DIRENV_VERSION 2.9.0
+ENV DIRENV_VERSION 2.17.0
 ENV PECO_VERSION 0.3.6
 ENV GHQ_VERSION 0.7.4
 
@@ -16,7 +16,7 @@ RUN set -x \
   && embulk gem install embulk-input-s3 \
   && embulk gem install embulk-output-elasticsearch \
 	&& mkdir -p /direnv/bin \
-	&& curl -fSL -o /direnv/bin/direnv https://github.com/zimbatm/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
+	&& curl -fSL -o /direnv/bin/direnv https://github.com/direnv/direnv/releases/download/v${DIRENV_VERSION}/direnv.linux-amd64 \
 	&& chmod +x /direnv/bin/direnv \
 	&& mkdir -p /peco/bin \
 	&& curl -fSL -o peco_linux_amd64.tar.gz https://github.com/peco/peco/releases/download/v${PECO_VERSION}/peco_linux_amd64.tar.gz \

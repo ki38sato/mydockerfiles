@@ -7,10 +7,10 @@ version combination history
 |version|PACKER_VERSION|ANSIBLE_VERSION|DIRENV_VERSION|PECO_VERION|GHQ_VERSION|
 |---|---|---|---|---|---|
 |1.1.1|1.1.1|?(2.3.0)|2.13.1|0.5.1|0.8.0|
-|1.1.3|1.1.3|?(2.3.0)|2.13.3|0.5.2|0.8.0|
+|1.1.3|1.1.3|?(2.3.0)|2.17.0|0.5.2|0.8.0|
 
 ```
-docker build -t packer-dev:1.1.3 base/ --build-arg DIRENV_VERSION=2.13.3 --build-arg PECO_VERSION=0.5.2 --build-arg GHQ_VERSION=0.8.0
+docker build -t packer-dev:1.1.3 base/ --build-arg DIRENV_VERSION=2.17.0 --build-arg PECO_VERSION=0.5.2 --build-arg GHQ_VERSION=0.8.0
 ```
 
 ```
